@@ -1,7 +1,7 @@
 {
-  "id": "jolly_sprint",
-  "name": "Jolly's Sprint Mod",
+  "id": "jolly_autosave",
+  "name": "Jolly's AutoSave Mod",
   "author": "Jollyname",
   "version": "1.0.0",
-  "description": "Adds sprinting"
+  "description": "Autosaves every 20 minutes"
 }
