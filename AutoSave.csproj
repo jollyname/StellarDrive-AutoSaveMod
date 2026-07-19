@@ -14,6 +14,9 @@
 	<Reference Include="ReferencedAssemblies\Core.dll" />
 	<Reference Include="ReferencedAssemblies\Saving.dll" />
 	<Reference Include="ReferencedAssemblies\Saving.Interface.dll" />
+  	<Reference Include="ReferencedAssemblies\UI.dll" />
+	<Reference Include="ReferencedAssemblies\UnityEngine.UI.dll" />
+	<Reference Include="ReferencedAssemblies\Unity.TextMeshPro.dll" />
   </ItemGroup>
 
 </Project>
