@@ -12,7 +12,7 @@ namespace AutoSaveMod
         public const string Description = "Autosaves your game with a customizable interval";
         public const string Author = "Jollyname";
         public const string Company = null;
-        public const string Version = "1.1.0";
+        public const string Version = "1.1.1";
         public const string DownloadLink = null;
     }
 

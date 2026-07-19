@@ -3,6 +3,8 @@ using TMPro;
 using UI.Common.Options;
 using UnityEngine;
 using UnityEngine.UI;
+using System.Reflection;
+using UnityEngine.Events;
 
 namespace AutoSaveMod
 {
@@ -104,17 +106,40 @@ namespace AutoSaveMod
                 Transform windowMode = transform.Find("WindowMode");
 
                 GameObject obj = Instantiate(windowMode.gameObject, transform);
+                Destroy(obj.GetComponent<DevToolSettings>());
+
                 obj.name = _name;
 
                 dropdown = obj.GetComponentInChildren<TMP_Dropdown>();
                 label = obj.GetComponentInChildren<TMP_Text>();
 
-                dropdown.onValueChanged.RemoveAllListeners();
+                ClearPersistentListeners(dropdown);
             }
 
             label.text = _labelContent;
 
             return dropdown;
+        }
+
+        private void ClearPersistentListeners(TMP_Dropdown dropdown)
+        {
+            FieldInfo persistentCallsField = typeof(UnityEventBase)
+                .GetField("m_PersistentCalls", BindingFlags.Instance | BindingFlags.NonPublic);
+
+            if (persistentCallsField == null)
+                return;
+
+            object persistentCalls = persistentCallsField.GetValue(dropdown.onValueChanged);
+
+            FieldInfo callsField = persistentCalls.GetType()
+                .GetField("m_Calls", BindingFlags.Instance | BindingFlags.NonPublic);
+
+            if (callsField == null)
+                return;
+
+            callsField.SetValue(persistentCalls, null);
+
+            dropdown.onValueChanged.RemoveAllListeners();
         }
 
         private void OnToggleChanged(bool value)
